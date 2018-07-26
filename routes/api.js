@@ -1,7 +1,4 @@
 const router = require("express").Router();
-// const Users = require("../models/Users.js");
-// const QRcodes = require("../models/Qrcode.js");
-// const Bills = require("../models/Bills.js");
 const db = require("../models");
 
 
@@ -27,9 +24,10 @@ router.get("/api/bills/:id", function (req, res) {
             include: [db.Bill]
         })
         .then(function (dbBills) {
-            res.json(dbBills[0]);
+            res.json(dbBills);
         });
 });
+
 
 
 

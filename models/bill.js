@@ -12,6 +12,8 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER
         }
 
+    },{
+        timestamps: false
     });
 
     Bill.associate = function (models) {
