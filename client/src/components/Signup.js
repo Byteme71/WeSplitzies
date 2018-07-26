@@ -1,26 +1,59 @@
 import React from 'react';
 
 class Signup extends React.Component {
+    state = {
+        fullName: "",
+        email: "",
+        password: "",
+        address: "",
+        city: "",
+        state: "",
+        zip: "",
+        card: "",
+        month: "",
+        year: "",
+        cvv: "",
+    }
+
+    handleInputChange = (event) => {
+
+        // console.log(event.target.value);
+
+        const { name, value } = event.target;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleSignUp = (event) => {
+        event.preventDefault();
+
+        
+
+    }
+
+
     render() {
         return (
-            <form>
+            <form className="form" onSubmit={this.handleSignUp}>
                 <div className="form-group">
-                    <input type="text" className="form-control" id="full-name" placeholder="Full name"></input>
+                    <input value={this.state.value} name="fullName" onChange={this.handleInputChange} type="text" className="form-control" id="full-name" placeholder="Full name"></input>
                 </div>
                 <div className="form-group">
-                    <input type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"></input>
+                    <input value={this.state.value} name="email" onChange={this.handleInputChange} type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"></input>
                 </div>
                 <div className="form-group">
-                    <input type="password" className="form-control" id="password" placeholder="Password"></input>
+                    <input value={this.state.value} name="password" onChange={this.handleInputChange} type="password" className="form-control" id="password" placeholder="Password"></input>
                 </div>
                 <div className="form-group">
-                    <input type="text" className="form-control" id="street-address" placeholder="Street address"></input>
+                    <input value={this.state.value} name="address" onChange={this.handleInputChange} type="text" className="form-control" id="street-address" placeholder="Street address"></input>
                 </div>
                 <div className="form-group">
-                    <input type="text" className="form-control" id="city" placeholder="City"></input>
+                    <input value={this.state.value} name="city" onChange={this.handleInputChange} type="text" className="form-control" id="city" placeholder="City"></input>
                 </div>
                 <div className="form-group">
-                    <select class="form-control" id="state">
+                    <select value={this.state.state} name="state" onChange={this.handleInputChange} class="form-control" id="state">
                         <option selected="true" disabled="disabled">State:</option>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
@@ -76,14 +109,19 @@ class Signup extends React.Component {
                     </select>
                 </div>
                 <div className="form-group">
-                    <input type="number" className="form-control" id="zip" placeholder="ZIP"></input>
+                    <input value={this.state.value} name="zip" onChange={this.handleInputChange} type="number" className="form-control" id="zip" placeholder="ZIP"></input>
                 </div>
                 <div className="form-group">
-                    <input type="number" className="form-control" id="dc-card" placeholder="Debit/Credit Card"></input>
+                    <input value={this.state.value} name="card" onChange={this.handleInputChange} type="text" className="form-control" id="card" placeholder="Debit/Credit Card"></input>
                 </div>
                 <div className="form-group">
-                    <input type="date" className="form-control" id="exp-date" placeholder="Exp. Date"></input>
-                    <input type="number" className="form-control" id="cvc" placeholder="CVC"></input>
+                    <input value={this.state.value} name="month" onChange={this.handleInputChange} type="text" className="form-control" id="month" placeholder="Exp. Month"></input>
+                </div>
+                <div className="form-group">
+                    <input value={this.state.value} name="year" onChange={this.handleInputChange} type="text" className="form-control" id="year" placeholder="Exp. Year"></input>
+                </div>
+                <div className="form-group">
+                    <input value={this.state.value} name="cvc" onChange={this.handleInputChange} type="text" className="form-control" id="cvc" placeholder="CVV"></input>
                 </div>
                 <div className="form-group">
                     <button type="submit" className="btn btn-primary">Submit</button>
