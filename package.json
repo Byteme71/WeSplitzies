@@ -12,7 +12,7 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
-  "author": "",
+  "author": "devtldn <devtldn@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^3.5.0",
@@ -21,7 +21,16 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.15.4",
-    "mongoose": "^5.0.17",
-    "if-env": "^1.0.4"
-  }
+    "if-env": "^1.0.4",
+    "mongoose": "^5.0.17"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/devtldn/WeSplitzies.git"
+  },
+  "bugs": {
+    "url": "https://github.com/devtldn/WeSplitzies/issues"
+  },
+  "homepage": "https://github.com/devtldn/WeSplitzies#readme",
+  "keywords": []
 }
