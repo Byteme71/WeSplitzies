@@ -7,7 +7,7 @@ const db = require("../models");
 
 router.post("/api/bills", function (req, res) {
     console.log(req.body);
-    db.Bills.create({
+    db.Bill.create({
             items: req.body.items,
             price: req.body.price,
             qty: req.body.qty

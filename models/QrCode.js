@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    var QrCode = sequelize.define("QrCode", {
+    var Qrcode = sequelize.define("Qrcode", {
 
         qr_code: {
             type: DataTypes.STRING
@@ -7,10 +7,10 @@ module.exports = function (sequelize, DataTypes) {
 
     });
 
-    QrCode.associate = function (models) {
-        QrCode.hasMany(models.Bills, {
+    Qrcode.associate = function (models) {
+        Qrcode.hasMany(models.Bill, {
             onDelete: "cascade"
         });
     };
-    return QrCode;
+    return Qrcode;
 };

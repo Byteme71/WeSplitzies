@@ -1,6 +1,6 @@
 module.exports = function (sequelize, DataTypes) {
 
-    var Bills = sequelize.define("Bills", {
+    var Bill = sequelize.define("Bill", {
 
         items: {
             type: DataTypes.STRING
@@ -14,13 +14,13 @@ module.exports = function (sequelize, DataTypes) {
 
     });
 
-    Bills.associate = function (models) {
-        Bills.belongsTo(models.QrCode, {
+    Bill.associate = function (models) {
+        Bill.belongsTo(models.Qrcode, {
             foreingKey: {
                 allowNull: false
             }
         });
     };
 
-    return Bills;
+    return Bill;
 };
