@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+const db = require("./models");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -20,8 +20,9 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/wesplitzies");
 
-app.listen(PORT, () => {
-  console.log(`SERVER ACTIVE ON: ${PORT}!`);
+db.sequelize.sync({ force: false }).then(function () {
+    app.listen(PORT, function () {
+        console.log("App listening on PORT " + PORT);
+    });
 });
