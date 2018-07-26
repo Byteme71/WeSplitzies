@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
+const session = require("express-session");
 const db = require("./models");
 
 const PORT = process.env.PORT || 3001;
@@ -12,6 +13,13 @@ app.use(bodyParser.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
+app.use(session({
+  secret: "ihatesessions",
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: "auto", maxAge: null }
+}))
 
 const routes = require("./routes/api.js");
 app.use(routes);
