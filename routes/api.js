@@ -19,6 +19,20 @@ router.post("/api/bills", function (req, res) {
 
 
 
+router.get("/api/bills/:id", function (req, res) {
+    db.Qrcode.findAll({
+            where: {
+                id: req.params.id
+            },
+            include: [db.Bill]
+        })
+        .then(function (dbBills) {
+            res.json(dbBills[0]);
+        });
+});
+
+
+
 
 
 
