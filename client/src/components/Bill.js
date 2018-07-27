@@ -1,21 +1,38 @@
 import React from 'react';
 import axios from "axios";
 
+
 class Bill extends React.Component {
 state = {
     food: []
 };
 
 componentDidMount(){
+    
     axios.get(`/api/bills/1`).then(response => {
-        console.log("what is thisssssssss",response)
-        console.log("what is this also tell us", response.data)
-        console.log("is this the billllllllsssssss", response.data[0].Bills)
+        // console.log("what is thisssssssss",response)
+        // console.log("what is this also tell us", response.data)
+        // console.log("is this the billllllllsssssss", response.data[0].Bills)
 
         this.setState({
             food: response.data[0].Bills
         }, () => {
             console.log("is this all of my items from the bill or is it not??!!?!?!",this.state.food)
+            
+
+            this.state.food.map(item =>{
+
+                console.log("is this the price?",item.price)
+
+                console.log("this will be the qty", item.qty)
+                
+                var price = item.price;
+                var totalPrice = 0;
+                totalPrice += price
+
+                console.log("is this the total price of all the items on my bill??????", totalPrice)
+            })
+            // console.log("is this the price?", this.state.food)
         })
     })
 }
