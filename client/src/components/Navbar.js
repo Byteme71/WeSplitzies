@@ -15,15 +15,18 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { TopItems, BottomItems } from './Icons.js';
 
-import Current from "./Current/Current.js";
-import QR from "./QR/QR.js";
-import History from "./History/History.js";
-// import Signup from "./Signup/Signup.js";
-// import Login from "./Login/Login.js";
-// import Logout from "./Logout.js";
+import Current from "./pages/Current/Current.js";
+import QR from "./pages/QR/QR.js";
+import History from "./pages/History/History.js";
+// import Signup from "./pages/Signup/Signup.js";
+// import Login from "./pages/Login/Login.js";
+// import Logout from "./pages/Logout.js";
 
-const drawerWidth = 220;
+import "./Navbar.css";
+
+const drawerWidth = 200;
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -141,25 +144,15 @@ class App extends React.Component {
               {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
             </IconButton>
           </div>
-          <Router>
-          <div>
           <Divider />
-            <List><Link to="/"><i class="fas fa-money-check-alt"></i> Current</Link></List>
-            <List><Link to="/qr"><i class="fas fa-qrcode"></i> QR Scan</Link></List>
-            <List><Link to="/history"><i class="far fa-list-alt"></i> History</Link></List>
-            <List><Link to="/payment"><i class="far fa-credit-card"></i> Payment Method</Link></List>
-            <List><Link to="/contact"><i class="fas fa-user"></i> Contact Us</Link></List>
-            <List><Link to="/help"><i class="far fa-question-circle"></i> Help</Link></List>
+          <List>{TopItems}</List>
           <Divider />
-          </div>
-          </ Router>
-
-            <List>Logout</List>
+          <List>{BottomItems}</List>
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
             <div>
-                <Typography currentPage={this.state.currentPage} handlePageChange={this.handlePageChange} />
+              <Typography currentPage={this.state.currentPage} handlePageChange={this.handlePageChange} />
               {page}
             </div>
         </main>
