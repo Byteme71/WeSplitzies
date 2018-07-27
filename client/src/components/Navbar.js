@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -19,9 +19,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Current from "./Current/Current.js";
 import QR from "./QR/QR.js";
 import History from "./History/History.js";
-import Payment from "./Payment/Payment.js";
-import Contact from "./Contact/Contact.js";
-import Help from "./Help/Help.js";
 // import Signup from "./Signup/Signup.js";
 // import Login from "./Login/Login.js";
 // import Logout from "./Logout.js";
@@ -91,7 +88,7 @@ const styles = theme => ({
   },
 });
 
-class Navbar extends React.Component {
+class App extends React.Component {
   state = {
     open: false,
     currentPage: "Home",
@@ -113,24 +110,18 @@ class Navbar extends React.Component {
     const { classes, theme } = this.props;
 
     var page;
-    if(this.state.currentPage === "/") {    
+    if(this.state.currentPage === "Current") {    
       page = <Current />
     }
-    else if (this.state.currentPage === "qr") {
+    else if (this.state.currentPage === "QR") {
       page =<QR />
     }
-    else if (this.state.currentPage === "history") {
+    else if (this.state.currentPage === "History") {
       page =<History />
     }
-    else if (this.state.currentPage === "payment") {
-      page =<payment />
-    }
-    else if (this.state.currentPage === "contact") {
-        page =<Contact />
-    }
-    else if (this.state.currentPage === "help") {
-      page =<Help />
-    }
+    // else if (this.state.currentPage === "Payment") {
+    //   page =<Payment />
+    // }
 
     return (
       <div className={classes.root}>
@@ -153,17 +144,12 @@ class Navbar extends React.Component {
           <Router>
           <div>
           <Divider />
-            <List><a onClick={this.handlePageChange("Current")} className={this.state.currentPage === "Home" ? "nav-link active" : "nav-link"}> <i class="fas fa-money-check-alt"></i> Current </a> </List>
-
-            <List><a onClick={this.handlePageChange("QR")} className={this.state.currentPage === "Home" ? "nav-link active" : "nav-link"}> <i class="fas fa-qrcode"></i> QR Scan </a> </List>
-
-            <List><a onClick={this.handlePageChange("History")} className={this.state.currentPage === "Home" ? "nav-link active" : "nav-link"}> <i class="far fa-list-alt"></i> History </a> </List>
-
-            <List><a onClick={this.handlePageChange("Payment")} className={this.state.currentPage === "Home" ? "nav-link active" : "nav-link"}> <i class="far fa-credit-card"></i> Payment Method </a> </List>
-
-            <List><a onClick={this.handlePageChange("Contact")} className={this.state.currentPage === "Home" ? "nav-link active" : "nav-link"}> <i class="fas fa-user"></i> Contact Us </a> </List>
-
-            <List><a onClick={this.handlePageChange("Help")} className={this.state.currentPage === "Home" ? "nav-link active" : "nav-link"}> <i class="far fa-question-circle"></i> Help </a> </List>
+            <List><Link to="/"><i class="fas fa-money-check-alt"></i> Current</Link></List>
+            <List><Link to="/qr"><i class="fas fa-qrcode"></i> QR Scan</Link></List>
+            <List><Link to="/history"><i class="far fa-list-alt"></i> History</Link></List>
+            <List><Link to="/payment"><i class="far fa-credit-card"></i> Payment Method</Link></List>
+            <List><Link to="/contact"><i class="fas fa-user"></i> Contact Us</Link></List>
+            <List><Link to="/help"><i class="far fa-question-circle"></i> Help</Link></List>
           <Divider />
           </div>
           </ Router>
@@ -182,9 +168,9 @@ class Navbar extends React.Component {
   }
 }
 
-Navbar.propTypes = {
+App.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(Navbar);
+export default withStyles(styles, { withTheme: true })(App);
