@@ -9,6 +9,7 @@ import Home from "./pages/Home/Home.js";
 import Login from "./pages/Login/Login.js";
 import Payment from "./pages/Payment/Payment.js";
 import QR from "./pages/QR/QR.js";
+import Settings from "./pages/Settings/Settings.js";
 import Signup from "./pages/Signup/Signup.js";
 
 const Page = () => (
@@ -22,6 +23,7 @@ const Page = () => (
             <Route exact path="/login" component={Login} />
             <Route exact path="/payment" component={Payment} />
             <Route exact path="/qr" component={QR} />
+            <Route exact path="/settings" component={Settings} />
             <Route exact path="/signup" component={Signup} />
         </div>
     </Router> 

@@ -3,7 +3,7 @@ import React from "react";
 const Contact = () => {
   return (
     <header>
-      Contact Page
+      Contact Page lorem ipsum my batata potato mulana
     </header>
   );
 };

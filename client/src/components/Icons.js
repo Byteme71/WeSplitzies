@@ -4,7 +4,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import Receipt from '@material-ui/icons/Receipt';
-import QRScan from '@material-ui/icons/CropFree';
+import QR from '@material-ui/icons/CropFree';
 import History from '@material-ui/icons/Schedule';
 import Payment from '@material-ui/icons/CreditCard';
 import Settings from '@material-ui/icons/BrightnessLow';
@@ -14,35 +14,35 @@ import Logout from '@material-ui/icons/ExitToApp';
 
 export const TopItems = (
   <div>
-    <ListItem button>
+    <ListItem button component="a" href="./current">
       <ListItemIcon>
         <Receipt />
       </ListItemIcon>
       <ListItemText primary="Current" />
     </ListItem>
 
-    <ListItem button>
+    <ListItem button component="a" href="./qr">
       <ListItemIcon>
-        <QRScan />
+        <QR />
       </ListItemIcon>
       <ListItemText primary="QR Scan" />
     </ListItem>
 
-    <ListItem button>
+    <ListItem button component="a" href="./history">
       <ListItemIcon>
         <History />
       </ListItemIcon>
       <ListItemText primary="History" />
     </ListItem>
 
-    <ListItem button>
+    <ListItem button component="a" href="./payment">
       <ListItemIcon>
         <Payment />
       </ListItemIcon>
       <ListItemText primary="Payment" />
     </ListItem>
 
-    <ListItem button>
+    <ListItem button component="a" href="./settings">
       <ListItemIcon>
         <Settings />
       </ListItemIcon>
@@ -53,21 +53,21 @@ export const TopItems = (
 
 export const BottomItems = (
   <div>
-    <ListItem button>
+    <ListItem button component="a" href="./contact">
       <ListItemIcon>
         <Contact />
       </ListItemIcon>
       <ListItemText primary="Contact" />
     </ListItem>
 
-    <ListItem button>
+    <ListItem button component="a" href="./help">
       <ListItemIcon>
         <Help />
       </ListItemIcon>
       <ListItemText primary="Help" />
     </ListItem>
 
-    <ListItem button>
+    <ListItem button component="a" href="./logout">
       <ListItemIcon>
         <Logout />
       </ListItemIcon>
