@@ -11,6 +11,8 @@ const Header = () => {
       <Link to="/login">Log-in</Link>
       {" "}
       <Link to="/bill">Bill</Link>
+      {" "}
+      <Link to="/payment">Payment</Link>
     </header>
   );
 };

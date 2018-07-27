@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 class Bill extends React.Component {
@@ -6,7 +7,8 @@ class Bill extends React.Component {
         food: [],
         total: 0,
         people: 1,
-        item: 0
+        item: 0,
+        splitAmount:0
     };
 
     componentDidMount() {
@@ -56,21 +58,34 @@ class Bill extends React.Component {
 
         let people = event.target.value
 
-        this.splitBillEqually(people);
+        this.splitBillEqually("people", people);
 
     }
 
-    splitBillEqually = (people) => {
+    splitBillEqually = (item, value) => {
+        switch (item) {
+            case "people":
+                
+        }
         console.log("we need the total to divide it equally", this.state.total)
         let splittingTotal = this.state.total
         console.log("splitBillEqually (PEOPLE): ", people);
 
-        this.setState({people: people})
 
         //total/people
         let splitEqual = splittingTotal / people
 
         console.log("blaaaaaaaaaaaaaaaaaaaaa", splitEqual)
+
+
+        this.setState({ 
+            // people: people,
+            splitAmount: splitEqual
+        })
+        
+        this.props.setPeople(people)
+
+
         
         // the qty and the price need to be calculated to get the total and then the
         // total needs to be split equally based on how many people are on the bill
@@ -131,7 +146,7 @@ class Bill extends React.Component {
         } 
         <form className = "split" > <div className = "text-center"> Total Price : {
             this.state.total
-        } <button className = "btn btn-outline-primary btn-sm" onClick= {()=>this.splitBillEqually}> Split Equally </button>
+        } <Link to="/payment" className = "btn btn-outline-primary btn-sm" onClick= {(e)=>this.splitBillEqually("split", this.state.splitAmount)}>Split Equally</Link> 
         </div> 
         </form> 
         </div>
