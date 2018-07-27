@@ -1,49 +1,30 @@
-// import React, { Component } from "react";
-// import Navbar from "./Navbar";
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-// import Current from "./Current/Current.js";
-// import QR from "./QR/QR.js";
-// import History from "./History/History.js";
-// // import Signup from "./Signup/Signup.js";
-// // import Login from "./Login/Login.js";
-// // import Logout from "./Logout.js";
+import Contact from "./pages/Contact/Contact.js";
+import Current from "./pages/Current/Current.js";
+import Help from "./pages/Help/Help.js";
+import History from "./pages/History/History.js";
+import Home from "./pages/Home/Home.js";
+import Login from "./pages/Login/Login.js";
+import Payment from "./pages/Payment/Payment.js";
+import QR from "./pages/QR/QR.js";
+import Signup from "./pages/Signup/Signup.js";
 
-// class Page extends Component {
-//   state = {
-//     currentPage: "Home",
-//   };
+const Page = () => (
+    <Router>
+        <div className="container">
+            <Route exact path="/contact" component={Contact} />
+            <Route exact path="/current" component={Current} />
+            <Route exact path="/help" component={Help} />
+            <Route exact path="/history" component={History} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/payment" component={Payment} />
+            <Route exact path="/qr" component={QR} />
+            <Route exact path="/signup" component={Signup} />
+        </div>
+    </Router> 
+);
 
-//   handlePageChange = page => {
-//     this.setState({ currentPage: page });
-//   };
-
-//   render() {
-//     var page;
-//     // var active = "nav-links"
-//     if(this.state.currentPage === "About") {
-      
-//       page = <About />
-//     }
-//     else if (this.state.currentPage === "Blog") {
-//       page =<Blog />
-//     }
-//     else if (this.state.currentPage === "Contact") {
-//       page =<Contact />
-//     }
-//     else if (this.state.currentPage === "Home") {
-//       page =<Home />
-//     }
-
-//     return (
-//       <div>
-//         <Navbar
-//           currentPage={this.state.currentPage}
-//           handlePageChange={this.handlePageChange}
-//         />
-//         {page}
-//       </div>
-//     );
-//   }
-// }
-
-// export default Page;
+export default Page;

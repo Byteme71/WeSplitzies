@@ -7,7 +7,7 @@ import Receipt from '@material-ui/icons/Receipt';
 import QRScan from '@material-ui/icons/CropFree';
 import History from '@material-ui/icons/Schedule';
 import Payment from '@material-ui/icons/CreditCard';
-import Settings from '@material-ui/icons/SettingsApplications';
+import Settings from '@material-ui/icons/BrightnessLow';
 import Contact from '@material-ui/icons/AccountCircle';
 import Help from '@material-ui/icons/HelpOutline';
 import Logout from '@material-ui/icons/ExitToApp';
@@ -20,24 +20,28 @@ export const TopItems = (
       </ListItemIcon>
       <ListItemText primary="Current" />
     </ListItem>
+
     <ListItem button>
       <ListItemIcon>
         <QRScan />
       </ListItemIcon>
       <ListItemText primary="QR Scan" />
     </ListItem>
+
     <ListItem button>
       <ListItemIcon>
         <History />
       </ListItemIcon>
       <ListItemText primary="History" />
     </ListItem>
+
     <ListItem button>
       <ListItemIcon>
         <Payment />
       </ListItemIcon>
       <ListItemText primary="Payment" />
     </ListItem>
+
     <ListItem button>
       <ListItemIcon>
         <Settings />
@@ -55,12 +59,14 @@ export const BottomItems = (
       </ListItemIcon>
       <ListItemText primary="Contact" />
     </ListItem>
+
     <ListItem button>
       <ListItemIcon>
         <Help />
       </ListItemIcon>
       <ListItemText primary="Help" />
     </ListItem>
+
     <ListItem button>
       <ListItemIcon>
         <Logout />
