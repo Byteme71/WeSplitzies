@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class Signup extends React.Component {
     state = {
@@ -8,37 +9,60 @@ class Signup extends React.Component {
         address: "",
         city: "",
         state: "",
-        zip: "",
-        card: "",
-        month: "",
-        year: "",
-        cvv: "",
-    }
+        zip: 0,
+        card: 0,
+        month: 0,
+        year: 0,
+        cvv: 0
+    };
 
     handleInputChange = (event) => {
-
-        // console.log(event.target.value);
-
         const { name, value } = event.target;
 
         this.setState({
             [name]: value
         });
-    }
+    };
 
     handleSignUp = (event) => {
         event.preventDefault();
 
-        
+        let newUser = {
+            fullName: this.state.fullName,
+            email: this.state.email,
+            password: this.state.password,
+            address: this.state.address,
+            city: this.state.city,
+            state: this.state.state,
+            zip: this.state.zip,
+            card: this.state.card,
+            month: this.state.month,
+            year: this.state.year,
+            cvv: this.state.cvv
+        }
 
-    }
+        console.log("NEW USER: ", newUser);
+
+        axios.post('/signup', newUser).then(response => {
+            if (response.data.code === 304) {
+                alert("An account already exists with that email address.");
+                window.location.href='/signup';
+            } else {
+                alert("Account has been created. Welcome!");
+                window.location.href = '/';
+            }
+        }).catch(error => {
+            console.log("POST ERROR: ", error);
+        });
+        
+    };
 
 
     render() {
         return (
             <form className="form" onSubmit={this.handleSignUp}>
                 <div className="form-group">
-                    <input value={this.state.value} name="fullName" onChange={this.handleInputChange} type="text" className="form-control" id="full-name" placeholder="Full name"></input>
+                    <input value={this.state.value} name="fullName" onChange={this.handleInputChange} type="text" className="form-control" id="fullName" placeholder="Full name"></input>
                 </div>
                 <div className="form-group">
                     <input value={this.state.value} name="email" onChange={this.handleInputChange} type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"></input>
@@ -47,14 +71,14 @@ class Signup extends React.Component {
                     <input value={this.state.value} name="password" onChange={this.handleInputChange} type="password" className="form-control" id="password" placeholder="Password"></input>
                 </div>
                 <div className="form-group">
-                    <input value={this.state.value} name="address" onChange={this.handleInputChange} type="text" className="form-control" id="street-address" placeholder="Street address"></input>
+                    <input value={this.state.value} name="address" onChange={this.handleInputChange} type="text" className="form-control" id="address" placeholder="Street address"></input>
                 </div>
                 <div className="form-group">
                     <input value={this.state.value} name="city" onChange={this.handleInputChange} type="text" className="form-control" id="city" placeholder="City"></input>
                 </div>
                 <div className="form-group">
-                    <select value={this.state.state} name="state" onChange={this.handleInputChange} class="form-control" id="state">
-                        <option selected="true" disabled="disabled">State:</option>
+                    <select value={this.state.state} name="state" onChange={this.handleInputChange} className="form-control" id="state">
+                        <option select="true" disabled="disabled">State:</option>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
                         <option value="AZ">Arizona</option>
@@ -121,7 +145,7 @@ class Signup extends React.Component {
                     <input value={this.state.value} name="year" onChange={this.handleInputChange} type="text" className="form-control" id="year" placeholder="Exp. Year"></input>
                 </div>
                 <div className="form-group">
-                    <input value={this.state.value} name="cvc" onChange={this.handleInputChange} type="text" className="form-control" id="cvc" placeholder="CVV"></input>
+                    <input value={this.state.value} name="cvv" onChange={this.handleInputChange} type="text" className="form-control" id="cvv" placeholder="CVV"></input>
                 </div>
                 <div className="form-group">
                     <button type="submit" className="btn btn-primary">Submit</button>

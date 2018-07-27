@@ -4,6 +4,7 @@ import Header from "./components/Header.js";
 import Home from "./components/Home.js";
 import Signup from "./components/Signup.js";
 import Login from "./components/Login.js";
+import Logout from "./components/Logout.js";
 
 const App = () => (
   <Router>
@@ -12,6 +13,7 @@ const App = () => (
       <Route exact path="/" component={Home} />
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/login" component={Login} />
+      <Logout />
     </div>
   </Router>
 );
