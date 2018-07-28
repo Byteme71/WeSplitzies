@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Home extends React.Component {
+class Current extends React.Component {
     render() {
         return (
             <div>This is the current Bill</div>
@@ -8,4 +8,4 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+export default Current;
