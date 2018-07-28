@@ -31,7 +31,7 @@ class App extends React.Component {
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/login" component={Login} />
           <Route exact path="/bill" render={()=> <Bill setPeople={this.setPeople} />}/>
-      <Route exact path="/payment" render={()=> <Payment people={this.state.people}/>}/>/>
+      <Route exact path="/payment" render={()=> <Payment people={this.state.people}/>}/>
     </div>
   </Router>
     )
