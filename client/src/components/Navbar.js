@@ -14,6 +14,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuIcon from '@material-ui/icons/Menu';
 import { TopItems, BottomItems } from './Icons.js';
 import Page from './Page.js';
+import Title from './Title.js';
 
 const drawerWidth = 200;
 
@@ -105,7 +106,7 @@ class Navbar extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
-              {<Page />}
+              {<Title />}
             </Typography>
           </Toolbar>
         </AppBar>
