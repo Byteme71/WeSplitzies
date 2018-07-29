@@ -9,7 +9,8 @@ class Bill extends React.Component {
         people: 1,
         item: 0,
         splitAmount: 0,
-        subTotal:0
+        subTotal: 0,
+        clicked: false
     };
 
     componentDidMount() {
@@ -74,20 +75,23 @@ class Bill extends React.Component {
         //move the item to the person that chose it
     // }
 
-    peopleInParty = (people) => {
+    peopleInParty = (people, subTotal) => {
         var peopleInParty = [];
 
         for (let i = 0; i < people; i++) {
             peopleInParty.push(
-                <div className="text-center" key={i}>
-                    Person {i + 1} {this.state.subTotal}
+                <div className="text-center">
+                   <Link to="/payment" className="btn btn-outline-primary btn-sm"  onClick={(e) => this.peopleInParty(this.state.peopleInParty)} key={i}>
+                        Person {i + 1}: ${this.state.subTotal}
+                    </Link>
                 </div>);
         }
 
         return peopleInParty;
+        
     }
 
-    splitEachItem = (price, quantity) => {
+    splitEachItem = (price, quantity, id) => {
         
         console.log("waaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaah", this.state.people)
         let party = this.state.people
@@ -97,8 +101,16 @@ class Bill extends React.Component {
         let subTotalTwo = subTotal/party
         console.log("we have to multiple the qty by the price", subTotal)
         console.log("is this the split amnt for the individual person", subTotalTwo)
+  
+
+        let foods = this.state.food.filter(item => item.id !== id);
+
+        console.log("this is fooooooooooooooooooooods ", foods);
+
         this.setState({
-            subTotal: subTotalTwo
+            subTotal: this.state.subTotal += subTotalTwo,
+            clicked: true,
+            food: foods
         })
     }
 
@@ -123,7 +135,8 @@ class Bill extends React.Component {
             </div>
             {
             this.state.food.map((item) => {
-                    return (
+                                return (
+                        // <div className= "wrapper" style={{ display: this.state.clicked === true ? "none" : "inline-block"  }}>
                         <div key={item.id}>
 
                             <div className="card-body">
@@ -134,14 +147,15 @@ class Bill extends React.Component {
                                         Price: ${item.price} </span>
                                 </p>
 
-                                <button className="btn btn-outline-primary btn-sm" onClick={()=>this.splitEachItem(item.price, item.qty)}>
+                                <button className="btn btn-outline-primary btn-sm" onClick={() => this.splitEachItem(item.price, item.qty, item.id)}>
                                     Split Equally
                                 </button>
                                 <button className="btn btn-outline-primary btn-sm" /*onClick={this.buyOne} disabled={this.state.item.quantity <= 0}*/>
                                     Claim Item
                                 </button>
                             </div>
-                        </div>
+                                        </div>
+                                        // </div>
                     );
                 })
         } 
@@ -157,7 +171,7 @@ class Bill extends React.Component {
                 <br />
 
                 {
-                    this.peopleInParty(this.state.people)
+                    this.peopleInParty(this.state.people, this.state.subTotal)
                 }
 
                 <br />

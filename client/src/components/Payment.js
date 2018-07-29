@@ -9,7 +9,7 @@ class Payment extends React.Component {
 
         return (
             <div className="container">
-                <h1>Your total to pay is: {this.props.people}</h1>
+                <h1>Your total to pay is: {this.props.people} {this.props.subTotal}</h1>
                                 
                 <div className="creditCardForm">
                     <div className="heading">

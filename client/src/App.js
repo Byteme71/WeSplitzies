@@ -10,9 +10,13 @@ import Payment from "./components/Payment.js";
 
 class App extends React.Component {
   state= {
-    total: 0,
-    splitAmount: 0,
-    people: 1
+        food: [],
+        total: 0,
+        people: 1,
+        item: 0,
+        splitAmount: 0,
+        subTotal: 0,
+        clicked: false
   }
 
   setPeople = (people) => {
@@ -21,6 +25,12 @@ class App extends React.Component {
     })
   }
 
+  setSubTotal = (subTotal) => {
+    this.setState({
+      subTotal: subTotal
+    })
+  }
+  
   render() {
     console.log(this.state)
     return (
@@ -30,8 +40,8 @@ class App extends React.Component {
       <Route exact path="/" component={Home} />
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/login" component={Login} />
-          <Route exact path="/bill" render={()=> <Bill setPeople={this.setPeople} />}/>
-      <Route exact path="/payment" render={()=> <Payment people={this.state.people}/>}/>
+          <Route exact path="/bill" render={() => <Bill setSubTotal={this.setSubTotal} setPeople={this.setPeople} />}/>
+          <Route exact path="/payment" render={() => <Payment subTotal={this.state.subTotal} people={this.state.people}/>}/>
     </div>
   </Router>
     )
