@@ -29,22 +29,6 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        card: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        month: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        year: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        cvv: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
         token: {
             type: DataTypes.STRING,
             allowNull: false

@@ -2,18 +2,27 @@ import React from 'react';
 import axios from 'axios';
 
 class Signup extends React.Component {
-    state = {
-        fullName: "",
-        email: "",
-        password: "",
-        address: "",
-        city: "",
-        state: "",
-        zip: 0,
-        card: 0,
-        month: 0,
-        year: 0,
-        cvv: 0
+    constructor(props) {
+        super(props);
+        this.state = {
+            fullName: "",
+            email: "",
+            password: "",
+            address: "",
+            city: "",
+            state: "",
+            zip: 0,
+            formErrors: {
+                fullName: '',
+                email: '',
+                password: '',
+                zip: 0
+            },
+            fullNameValid: false,
+            emailValid: false,
+            passwordValid: false,
+            zipValid: false
+        };
     };
 
     handleInputChange = (event) => {
@@ -21,7 +30,54 @@ class Signup extends React.Component {
 
         this.setState({
             [name]: value
+        }, () => { this.validateField(name, value) });
+    };
+
+    validateField = (fieldName, value) => {
+        let fieldValidationErrors = this.state.formErrors;
+        let fullNameValid = this.state.fullNameValid;
+        let emailValid = this.state.emailValid;
+        let passwordValid = this.state.passwordValid;
+        let zipValid = this.state.zip;
+
+        switch (fieldName) {
+            case 'fullName':
+                fullNameValid = value.match(/^[a-z ,.'-]+$/i);
+                fieldValidationErrors.fullName = fullNameValid ? '' : ' needs your full name!';
+                break;
+            case 'email':
+                emailValid = value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+                fieldValidationErrors.email = emailValid ? '' : ' is an invalid email!';
+                break;
+            case 'password':
+                passwordValid = value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{4,}$/);
+                fieldValidationErrors.password = passwordValid ? '' : ' does not meet the minimum requirements!';
+                break;
+            case 'zip':
+                zipValid = value.match(/(^\d{5}$)|(^\d{5}-\d{4}$)/);
+                fieldValidationErrors.zip = zipValid ? '' : ' is an invalid ZIP code!';
+                break;
+            default:
+                break;
+        };
+
+        this.setState({
+            formErrors: fieldValidationErrors,
+            fullNameValid: fullNameValid,
+            emailValid: emailValid,
+            passwordValid: passwordValid,
+            zipValid: zipValid
+        }, this.validateForm);
+    };
+
+    validateForm = () => {
+        this.setState({
+            formValid: this.state.fullNameValid && this.state.emailValid && this.state.passwordValid && this.state.zipValid
         });
+    };
+
+    errorClass = (error) => {
+        return (error.length === 0 ? '' : 'has-error');
     };
 
     handleSignUp = (event) => {
@@ -39,45 +95,43 @@ class Signup extends React.Component {
             month: this.state.month,
             year: this.state.year,
             cvv: this.state.cvv
-        }
+        };
 
         console.log("NEW USER: ", newUser);
 
         axios.post('/signup', newUser).then(response => {
             if (response.data.code === 304) {
-                alert("An account already exists with that email address.");
-                window.location.href='/signup';
+                window.location.href = '/signup';
             } else {
-                alert("Account has been created. Welcome!");
                 window.location.href = '/';
             }
         }).catch(error => {
-            console.log("POST ERROR: ", error);
+            throw error;
         });
-        
+
     };
 
 
     render() {
         return (
             <form className="form" onSubmit={this.handleSignUp}>
-                <div className="form-group">
-                    <input value={this.state.value} name="fullName" onChange={this.handleInputChange} type="text" className="form-control" id="fullName" placeholder="Full name"></input>
+                <div className={`form-group ${this.errorClass(this.state.formErrors.fullName)}`}>
+                    <input value={this.state.value} name="fullName" onChange={this.handleInputChange} type="text" className="form-control" placeholder="Full name"></input>
+                </div>
+                <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
+                    <input value={this.state.value} name="email" onChange={this.handleInputChange} type="email" className="form-control" aria-describedby="emailHelp" placeholder="Enter email"></input>
+                </div>
+                <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
+                    <input value={this.state.value} name="password" onChange={this.handleInputChange} type="password" className="form-control" placeholder="Password"></input>
                 </div>
                 <div className="form-group">
-                    <input value={this.state.value} name="email" onChange={this.handleInputChange} type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"></input>
+                    <input value={this.state.value} name="address" onChange={this.handleInputChange} type="text" className="form-control" placeholder="Street address"></input>
                 </div>
                 <div className="form-group">
-                    <input value={this.state.value} name="password" onChange={this.handleInputChange} type="password" className="form-control" id="password" placeholder="Password"></input>
+                    <input value={this.state.value} name="city" onChange={this.handleInputChange} type="text" className="form-control" placeholder="City"></input>
                 </div>
                 <div className="form-group">
-                    <input value={this.state.value} name="address" onChange={this.handleInputChange} type="text" className="form-control" id="address" placeholder="Street address"></input>
-                </div>
-                <div className="form-group">
-                    <input value={this.state.value} name="city" onChange={this.handleInputChange} type="text" className="form-control" id="city" placeholder="City"></input>
-                </div>
-                <div className="form-group">
-                    <select value={this.state.state} name="state" onChange={this.handleInputChange} className="form-control" id="state">
+                    <select value={this.state.state} name="state" onChange={this.handleInputChange} className="form-control">
                         <option select="true" disabled="disabled">State:</option>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
@@ -132,27 +186,16 @@ class Signup extends React.Component {
                         <option value="WY">Wyoming</option>
                     </select>
                 </div>
-                <div className="form-group">
-                    <input value={this.state.value} name="zip" onChange={this.handleInputChange} type="number" className="form-control" id="zip" placeholder="ZIP"></input>
+                <div className={`form-group ${this.errorClass(this.state.formErrors.zip)}`}>
+                    <input value={this.state.value} name="zip" onChange={this.handleInputChange} type="text" className="form-control" placeholder="ZIP code"></input>
                 </div>
                 <div className="form-group">
-                    <input value={this.state.value} name="card" onChange={this.handleInputChange} type="text" className="form-control" id="card" placeholder="Debit/Credit Card"></input>
+                    <button type="submit" className="btn btn-primary" disabled={!this.state.formValid}>Submit</button>
                 </div>
-                <div className="form-group">
-                    <input value={this.state.value} name="month" onChange={this.handleInputChange} type="text" className="form-control" id="month" placeholder="Exp. Month"></input>
-                </div>
-                <div className="form-group">
-                    <input value={this.state.value} name="year" onChange={this.handleInputChange} type="text" className="form-control" id="year" placeholder="Exp. Year"></input>
-                </div>
-                <div className="form-group">
-                    <input value={this.state.value} name="cvv" onChange={this.handleInputChange} type="text" className="form-control" id="cvv" placeholder="CVV"></input>
-                </div>
-                <div className="form-group">
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                </div>
+                <br />
             </form>
-        )
-    }
-}
+        );
+    };
+};
 
 export default Signup;
