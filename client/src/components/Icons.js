@@ -14,11 +14,11 @@ import Logout from '@material-ui/icons/ExitToApp';
 
 export const TopItems = (
   <div>
-    <ListItem button component="a" href="./current">
+    <ListItem button component="a" href="./bill">
       <ListItemIcon>
         <Receipt />
       </ListItemIcon>
-      <ListItemText primary="Current" />
+      <ListItemText primary="Bill" />
     </ListItem>
 
     <ListItem button component="a" href="./qr">
