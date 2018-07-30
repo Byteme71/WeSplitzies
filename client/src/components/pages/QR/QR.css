@@ -1,0 +1,29 @@
+.qr-code.qr-code {
+    min-width: 200px;
+    max-width: 600px;
+    min-height: 200px;
+    max-height: 600px;
+    height: 100%;
+    width: 100%;
+}
+
+.qr-btn.qr-btn {
+    margin-top: 10px;
+    float: right;
+}
+
+.qr-text.qr-text {
+    margin: auto;
+    height: 100%;
+    width: 100%;
+}
+
+.txt-size.txt-size {
+    min-width: 200px;
+    max-width: 600px;
+}
+
+.btn-float.btn-float {
+    min-width: 200px;
+    max-width: 600px;
+}

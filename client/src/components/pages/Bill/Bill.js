@@ -1,6 +1,9 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import axios from "axios";
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+import { Party } from './Party.js';
 
 class Bill extends React.Component {
     state = {
@@ -54,6 +57,12 @@ class Bill extends React.Component {
 
         this.splitBillEqually(people);
     }
+
+    handleChange = name => event => {
+        this.setState({
+          [name]: event.target.value,
+        });
+      };
 
     splitBillEqually = (people) => {
 
@@ -146,6 +155,15 @@ class Bill extends React.Component {
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
+            {/* <div>
+                <TextField id="select-party" select label="Select" value={this.state.party} onChange={this.handleChange('party')} helperText="Please select your party size" margin="normal" >
+                    {Party.map(option => (
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.name}
+                        </MenuItem>
+                    ))}
+                </TextField>
+            </div> */}
                 </div> < div className="card">
                 <div className="card-header text-center">*Restaurant Name Placeholder* Bill
             </div>
