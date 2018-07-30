@@ -3,7 +3,7 @@ import React from "react";
 const Current = () => {
   return (
     <header>
-      Your Bill
+      Your Payment
     </header>
   );
 };
