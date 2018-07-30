@@ -94,7 +94,75 @@ router.post("/login", function (req, res) {
     });
 });
 
-router.get('/signup', function (req, res) {
+router.get('/contact', function (req, res) {
+    if (req.session.user) {
+        res.redirect('/');
+    } else if (req.cookie) {
+        db.User.findOne({
+            where: {
+                token: req.session.user.token
+            }
+        }).then(function (result) {
+            req.session.user = result.id;
+            res.redirect('/');
+        });
+    } else {
+        res.redirect('/');
+    };
+});
+
+router.get('/current', function (req, res) {
+    if (req.session.user) {
+        res.redirect('/');
+    } else if (req.cookie) {
+        db.User.findOne({
+            where: {
+                token: req.session.user.token
+            }
+        }).then(function (result) {
+            req.session.user = result.id;
+            res.redirect('/');
+        });
+    } else {
+        res.redirect('/');
+    };
+});
+
+router.get('/help', function (req, res) {
+    if (req.session.user) {
+        res.redirect('/');
+    } else if (req.cookie) {
+        db.User.findOne({
+            where: {
+                token: req.session.user.token
+            }
+        }).then(function (result) {
+            req.session.user = result.id;
+            res.redirect('/');
+        });
+    } else {
+        res.redirect('/');
+    };
+});
+
+router.get('/history', function (req, res) {
+    if (req.session.user) {
+        res.redirect('/');
+    } else if (req.cookie) {
+        db.User.findOne({
+            where: {
+                token: req.session.user.token
+            }
+        }).then(function (result) {
+            req.session.user = result.id;
+            res.redirect('/');
+        });
+    } else {
+        res.redirect('/');
+    };
+});
+
+router.get('/home', function (req, res) {
     if (req.session.user) {
         res.redirect('/');
     } else if (req.cookie) {
@@ -112,6 +180,74 @@ router.get('/signup', function (req, res) {
 });
 
 router.get('/login', function (req, res) {
+    if (req.session.user) {
+        res.redirect('/');
+    } else if (req.cookie) {
+        db.User.findOne({
+            where: {
+                token: req.session.user.token
+            }
+        }).then(function (result) {
+            req.session.user = result.id;
+            res.redirect('/');
+        });
+    } else {
+        res.redirect('/');
+    };
+});
+
+router.get('/payment', function (req, res) {
+    if (req.session.user) {
+        res.redirect('/');
+    } else if (req.cookie) {
+        db.User.findOne({
+            where: {
+                token: req.session.user.token
+            }
+        }).then(function (result) {
+            req.session.user = result.id;
+            res.redirect('/');
+        });
+    } else {
+        res.redirect('/');
+    };
+});
+
+router.get('/qr', function (req, res) {
+    if (req.session.user) {
+        res.redirect('/');
+    } else if (req.cookie) {
+        db.User.findOne({
+            where: {
+                token: req.session.user.token
+            }
+        }).then(function (result) {
+            req.session.user = result.id;
+            res.redirect('/');
+        });
+    } else {
+        res.redirect('/');
+    };
+});
+
+router.get('/settings', function (req, res) {
+    if (req.session.user) {
+        res.redirect('/');
+    } else if (req.cookie) {
+        db.User.findOne({
+            where: {
+                token: req.session.user.token
+            }
+        }).then(function (result) {
+            req.session.user = result.id;
+            res.redirect('/');
+        });
+    } else {
+        res.redirect('/');
+    };
+});
+
+router.get('/signup', function (req, res) {
     if (req.session.user) {
         res.redirect('/');
     } else if (req.cookie) {

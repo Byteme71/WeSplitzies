@@ -6,18 +6,27 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { AllStates } from './States.js';
 
 class Signup extends React.Component {
-    state = {
-        fullName: "",
-        email: "",
-        password: "",
-        address: "",
-        city: "",
-        state: "",
-        zip: 0,
-        card: 0,
-        month: 0,
-        year: 0,
-        cvv: 0
+    constructor(props) {
+        super(props);
+        this.state = {
+            fullName: "",
+            email: "",
+            password: "",
+            address: "",
+            city: "",
+            state: "",
+            zip: 0,
+            formErrors: {
+                fullName: '',
+                email: '',
+                password: '',
+                zip: 0
+            },
+            fullNameValid: false,
+            emailValid: false,
+            passwordValid: false,
+            zipValid: false
+        };
     };
 
     handleInputChange = (event) => {
@@ -25,6 +34,49 @@ class Signup extends React.Component {
 
         this.setState({
             [name]: value
+        }, () => { this.validateField(name, value) });
+    };
+
+    validateField = (fieldName, value) => {
+        let fieldValidationErrors = this.state.formErrors;
+        let fullNameValid = this.state.fullNameValid;
+        let emailValid = this.state.emailValid;
+        let passwordValid = this.state.passwordValid;
+        let zipValid = this.state.zip;
+
+        switch (fieldName) {
+            case 'fullName':
+                fullNameValid = value.match(/^[a-z ,.'-]+$/i);
+                fieldValidationErrors.fullName = fullNameValid ? '' : ' needs your full name!';
+                break;
+            case 'email':
+                emailValid = value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+                fieldValidationErrors.email = emailValid ? '' : ' is an invalid email!';
+                break;
+            case 'password':
+                passwordValid = value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{4,}$/);
+                fieldValidationErrors.password = passwordValid ? '' : ' does not meet the minimum requirements!';
+                break;
+            case 'zip':
+                zipValid = value.match(/(^\d{5}$)|(^\d{5}-\d{4}$)/);
+                fieldValidationErrors.zip = zipValid ? '' : ' is an invalid ZIP code!';
+                break;
+            default:
+                break;
+        };
+
+        this.setState({
+            formErrors: fieldValidationErrors,
+            fullNameValid: fullNameValid,
+            emailValid: emailValid,
+            passwordValid: passwordValid,
+            zipValid: zipValid
+        }, this.validateForm);
+    };
+
+    validateForm = () => {
+        this.setState({
+            formValid: this.state.fullNameValid && this.state.emailValid && this.state.passwordValid && this.state.zipValid
         });
     };
 
@@ -32,6 +84,10 @@ class Signup extends React.Component {
         this.setState({
           [name]: event.target.value,
         });
+    };
+
+    errorClass = (error) => {
+        return (error.length === 0 ? '' : 'has-error');
     };
 
     handleSignUp = (event) => {
@@ -49,22 +105,20 @@ class Signup extends React.Component {
             month: this.state.month,
             year: this.state.year,
             cvv: this.state.cvv
-        }
+        };
 
         console.log("NEW USER: ", newUser);
 
         axios.post('/signup', newUser).then(response => {
             if (response.data.code === 304) {
-                alert("An account already exists with that email address.");
-                window.location.href='/signup';
+                window.location.href = '/signup';
             } else {
-                alert("Account has been created. Welcome!");
                 window.location.href = '/';
             }
         }).catch(error => {
-            console.log("POST ERROR: ", error);
+            throw error;
         });
-        
+
     };
 
 
@@ -101,9 +155,10 @@ class Signup extends React.Component {
                 <div className="form-group">
                     <Button type="submit" className="btn btn-primary">Submit</Button>
                 </div>
+                <br />
             </form>
-        )
-    }
-}
+        );
+    };
+};
 
 export default Signup;
