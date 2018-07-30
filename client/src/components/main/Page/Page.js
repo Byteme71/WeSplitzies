@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Contact from "./pages/Contact/index.js";
-import Current from "./pages/Current/index.js";
-import Help from "./pages/Help/index.js";
-import History from "./pages/History/index.js";
-import Payment from "./pages/Payment/index.js";
-import QR from "./pages/QR/index.js";
-import Settings from "./pages/Settings/index.js";
+import Contact from "../../pages/Contact/Contact.js";
+import Current from "../../pages/Current/Current.js";
+import Help from "../../pages/Help/Help.js";
+import History from "../../pages/History/History.js";
+import Payment from "../../pages/Payment/Payment.js";
+import QR from "../../pages/QR/QR.js";
+import Settings from "../../pages/Settings/Settings.js";
 
-const Title = () => (
+const Page = () => (
     <Router>
         <div className="container">
             <Route exact path="/contact" component={Contact} />
@@ -22,4 +22,4 @@ const Title = () => (
     </Router> 
 );
 
-export default Title;
+export default Page;
