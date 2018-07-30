@@ -53,7 +53,6 @@ class Bill extends React.Component {
         let people = event.target.value
 
         this.splitBillEqually(people);
-
     }
 
     splitBillEqually = (people) => {
@@ -71,41 +70,58 @@ class Bill extends React.Component {
         this.props.setPeople(people)
     }
 
-    // claimItem = () => {
-        //move the item to the person that chose it
-    // }
+    claimItem = (price, quantity, id) => {
 
-    peopleInParty = (people, subTotal) => {
-        var peopleInParty = [];
-
-        for (let i = 0; i < people; i++) {
-            peopleInParty.push(
-                <div className="text-center">
-                   <Link to="/payment" className="btn btn-outline-primary btn-sm"  onClick={(e) => this.peopleInParty(this.state.peopleInParty)} key={i}>
-                        Person {i + 1}: ${this.state.subTotal}
-                    </Link>
-                </div>);
-        }
-
-        return peopleInParty;
-        
-    }
-
-    splitEachItem = (price, quantity, id) => {
-        
         console.log("waaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaah", this.state.people)
         let party = this.state.people
         console.log("for splitting each individual item", price)
         console.log("is this the qty for each item for splitting", quantity)
         let subTotal = price * quantity
-        let subTotalTwo = subTotal/party
+        let subTotalTwo = subTotal / party
         console.log("we have to multiple the qty by the price", subTotal)
         console.log("is this the split amnt for the individual person", subTotalTwo)
+
+
+        let foods = this.state.food.filter(item => item.id !== id);
+
+        this.setState({
+            subTotal: this.state.subTotal += subTotalTwo,
+            clicked: true,
+            food: foods
+        })
+
+    }
+
+    peopleInParty = (people) => {
+        var peopleInParty = [];
+
+        for (let i = 0; i < people; i++) {
+            peopleInParty.push(
+                <div className="text-center" key={i}>
+                   <Link to="/payment" className="btn btn-outline-primary btn-sm"  onClick={(e) => this.peopleInParty(this.state.peopleInParty)}>
+                        Person {i + 1}: ${this.state.subTotal}
+                    </Link>
+                </div>);       
+        }
+
+        return peopleInParty;
+    }
+
+    splitEachItem = (price, quantity, id) => {
+        
+        // console.log("waaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaah", this.state.people)
+        let party = this.state.people
+        // console.log("for splitting each individual item", price)
+        // console.log("is this the qty for each item for splitting", quantity)
+        let subTotal = price * quantity
+        let subTotalTwo = subTotal/party
+        // console.log("we have to multiple the qty by the price", subTotal)
+        // console.log("is this the split amnt for the individual person", subTotalTwo)
   
 
         let foods = this.state.food.filter(item => item.id !== id);
 
-        console.log("this is fooooooooooooooooooooods ", foods);
+        // console.log("this is fooooooooooooooooooooods ", foods);
 
         this.setState({
             subTotal: this.state.subTotal += subTotalTwo,
@@ -150,7 +166,7 @@ class Bill extends React.Component {
                                 <button className="btn btn-outline-primary btn-sm" onClick={() => this.splitEachItem(item.price, item.qty, item.id)}>
                                     Split Equally
                                 </button>
-                                <button className="btn btn-outline-primary btn-sm" /*onClick={this.buyOne} disabled={this.state.item.quantity <= 0}*/>
+                                <button className="btn btn-outline-primary btn-sm" onClick={() => this.claimItem(item.price, item.qty, item.id)}>
                                     Claim Item
                                 </button>
                             </div>
@@ -171,7 +187,7 @@ class Bill extends React.Component {
                 <br />
 
                 {
-                    this.peopleInParty(this.state.people, this.state.subTotal)
+                    this.peopleInParty(this.state.people)
                 }
 
                 <br />

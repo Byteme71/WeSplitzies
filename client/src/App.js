@@ -25,11 +25,7 @@ class App extends React.Component {
     })
   }
 
-  setSubTotal = (subTotal) => {
-    this.setState({
-      subTotal: subTotal
-    })
-  }
+
   
   render() {
     console.log(this.state)
@@ -40,8 +36,8 @@ class App extends React.Component {
       <Route exact path="/" component={Home} />
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/login" component={Login} />
-          <Route exact path="/bill" render={() => <Bill setSubTotal={this.setSubTotal} setPeople={this.setPeople} />}/>
-          <Route exact path="/payment" render={() => <Payment subTotal={this.state.subTotal} people={this.state.people}/>}/>
+          <Route exact path="/bill" render={() => <Bill setPeople={this.setPeople} />}/>
+          <Route exact path="/payment" render={() => <Payment people={this.state.people}/>}/>
     </div>
   </Router>
     )

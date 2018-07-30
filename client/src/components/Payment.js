@@ -5,11 +5,11 @@ import React from 'react';
 class Payment extends React.Component {
 
     render() {
-        console.log("this is on the payment page",this.props)
+        console.log("this is on the payment page ", this.props)
 
         return (
             <div className="container">
-                <h1>Your total to pay is: {this.props.people} {this.props.subTotal}</h1>
+                <h1>Your total to pay is: ${this.props.people}</h1>
                                 
                 <div className="creditCardForm">
                     <div className="heading">
