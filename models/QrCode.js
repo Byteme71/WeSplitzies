@@ -5,6 +5,8 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING
         }
 
+    },{
+        timestamps: false
     });
 
     Qrcode.associate = function (models) {
