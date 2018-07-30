@@ -8,9 +8,7 @@ class QR extends React.Component {
     render() {
         return (
         <div>
-    
-                <img onClick={this.toBillPage}src="https://www.qrstuff.com/images/sample.png" height="200px" width="200px"/>        
-
+            <img onClick={this.toBillPage}src="https://www.qrstuff.com/images/sample.png" alt="QR-Dummy" height="200px" width="200px"/>        
         </div>
         )
     }

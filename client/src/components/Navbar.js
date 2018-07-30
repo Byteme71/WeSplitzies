@@ -12,9 +12,9 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuIcon from '@material-ui/icons/Menu';
-import { TopItems, BottomItems } from './Icons.js';
-import Page from './Page.js';
-import Title from './Title.js';
+import { TopItems, BottomItems } from './main/Icons/Icons.js';
+import Page from './main/Page/Page.js';
+import Title from './main/Title/Title.js';
 
 const drawerWidth = 200;
 
