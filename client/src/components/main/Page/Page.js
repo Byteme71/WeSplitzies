@@ -8,6 +8,13 @@ import Payment from "./Payment";
 import QR from "./pages/QR/QR.js";
 import Settings from "./pages/Settings/Settings.js";
 import Bill from "./Bill"
+import Contact from "../../pages/Contact/Contact.js";
+import Current from "../../pages/Current/Current.js";
+import Help from "../../pages/Help/Help.js";
+import History from "../../pages/History/History.js";
+import Payment from "../../pages/Payment/Payment.js";
+import QR from "../../pages/QR/QR.js";
+import Settings from "../../pages/Settings/Settings.js";
 
 
 

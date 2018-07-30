@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Contact from "./pages/Contact/index.js";
-import Current from "./pages/Current/index.js";
-import Help from "./pages/Help/index.js";
-import History from "./pages/History/index.js";
-import Payment from "./pages/Payment/index.js";
-import QR from "./pages/QR/index.js";
-import Settings from "./pages/Settings/index.js";
+import Contact from "../../pages/Contact/index.js";
+import Current from "../../pages/Current/index.js";
+import Help from "../../pages/Help/index.js";
+import History from "../../pages/History/index.js";
+import Payment from "../../pages/Payment/index.js";
+import QR from "../../pages/QR/index.js";
+import Settings from "../../pages/Settings/index.js";
 
 const Title = () => (
     <Router>

@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 class Login extends React.Component {
     state = {
@@ -40,13 +42,13 @@ class Login extends React.Component {
         return (
             <form className="form" onSubmit={this.handleLogIn}>
                 <div className="form-group">
-                    <input value={this.state.value} name="email" onChange={this.handleInputChange} type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"></input>
+                    <TextField value={this.state.value} name="email" onChange={this.handleInputChange} type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"></TextField>
                 </div>
                 <div className="form-group">
-                    <input value={this.state.value} name="password" onChange={this.handleInputChange} type="password" className="form-control" id="password" placeholder="Password"></input>
+                    <TextField value={this.state.value} name="password" onChange={this.handleInputChange} type="password" className="form-control" id="password" placeholder="Password"></TextField>
                 </div>
                 <div className="form-group">
-                    <button type="submit" className="btn btn-primary">Log in</button>
+                    <Button type="submit" className="btn btn-primary">Log in</Button>
                 </div>
             </form>
         )
