@@ -5,6 +5,17 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import { Party } from './Party.js';
 
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import './Table.css';
+
+
 class Bill extends React.Component {
     state = {
         food: [],
@@ -48,6 +59,7 @@ class Bill extends React.Component {
             })
     }
 
+    
     handleInputChange = (event) => {
 
         console.log(event.target.value)
@@ -57,6 +69,7 @@ class Bill extends React.Component {
 
         this.splitBillEqually(people);
     }
+
 
     handleChange = name => event => {
         this.setState({
@@ -147,16 +160,18 @@ class Bill extends React.Component {
             <div>
             <div className="container">
             <div className="form-group">
-                <label htmlFor="sel1">Select amount of people on the bill:</label>
+                {/* <label htmlFor="sel1">Select amount of people on the bill:</label>
                 <select className="form-control" id="people" onChange={this.handleInputChange}>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
-                </select>
+                </select> */}
+            
+            {/* ns material ui dropdown */}
             <div>
-                <TextField id="select-party" select label="Select" value={this.state.party} onChange={this.handleChange('party')} helperText="Please select your party size" margin="normal" >
+                <TextField id="people" select label="Select" value={this.state.party} onChange={this.handleInputChange} helperText="Select your party size" margin="normal" >
                     {Party.map(option => (
                         <MenuItem key={option.value} value={option.value}>
                             {option.name}
@@ -164,22 +179,59 @@ class Bill extends React.Component {
                     ))}
                 </TextField>
             </div>
-                </div> < div className="card">
+
+                </div>
+                 < div className="card">
                 <div className="card-header text-center">*Restaurant Name Placeholder* Bill
             </div>
             {
             this.state.food.map((item) => {
+                                
+                
                                 return (
                         // <div className= "wrapper" style={{ display: this.state.clicked === true ? "none" : "inline-block"  }}>
+                    
+
+
                         <div key={item.id}>
 
+                            <div>
+                                    <Paper className="root">
+                                        <Table className="table">
+                                            <TableHead>
+                                                <TableRow>
+                                                    <TableCell>Qty</TableCell>
+                                                    <TableCell>Item</TableCell>
+                                                    <TableCell>Amt</TableCell>
+                                                </TableRow>
+                                            </TableHead> 
+                                            <TableBody>
+                                                {/* <TableCell>{item.qty}</TableCell>
+                                                <TableCell>{item.items}</TableCell>
+                                                <TableCell>${item.price}</TableCell> */}
+                                                {this.state.food.map(n => {
+                                                    return (
+                                                      <TableRow key={n.id}>
+                                                        <TableCell component="th" scope="row">
+                                                          {n.qty}
+                                                        </TableCell>
+                                                        <TableCell  component="th" scope="row">{n.items}</TableCell>
+                                                        <TableCell  component="th" scope="row">{n.price}</TableCell>
+                                                      </TableRow>
+                                                    );
+                                                  })}                                                                                             
+                                            </TableBody>  
+                                        </Table>
+                                    </Paper>   
+                             </div>   
+
                             <div className="card-body">
-                                <p>
+                                {/* <p>
                                     <span>Qty: {item.qty} </span>
                                     Item: {item.items} 
                                     <span>
                                         Price: ${item.price} </span>
-                                </p>
+                                </p> */}
 
                                 <button className="btn btn-outline-primary btn-sm" onClick={() => this.splitEachItem(item.price, item.qty, item.id)}>
                                     Split Equally
