@@ -155,7 +155,7 @@ class Bill extends React.Component {
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-            {/* <div>
+            <div>
                 <TextField id="select-party" select label="Select" value={this.state.party} onChange={this.handleChange('party')} helperText="Please select your party size" margin="normal" >
                     {Party.map(option => (
                         <MenuItem key={option.value} value={option.value}>
@@ -163,7 +163,7 @@ class Bill extends React.Component {
                         </MenuItem>
                     ))}
                 </TextField>
-            </div> */}
+            </div>
                 </div> < div className="card">
                 <div className="card-header text-center">*Restaurant Name Placeholder* Bill
             </div>
