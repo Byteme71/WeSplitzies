@@ -120,7 +120,7 @@ class Navbar extends React.Component {
           <Divider />
             <List>{TopItems}</List>
           <Divider />
-            <List>{BottomItems}</List>
+            <List><BottomItems /></List>
         </Drawer>
         
         <main className={classes.content}>
