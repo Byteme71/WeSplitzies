@@ -4,16 +4,24 @@ import axios from "axios";
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import { Party } from './Party.js';
+import Modal from './Modal';
 
 class Bill extends React.Component {
     state = {
         food: [],
         total: 0,
-        people: 1,
         item: 0,
         splitAmount: 0,
         subTotal: 0,
-        clicked: false
+        show: false
+    };
+
+    showModal = () => {
+        this.setState({ show: true });
+    };
+
+    hideModal = () => {
+        this.setState({ show: false });
     };
 
     componentDidMount() {
@@ -66,32 +74,32 @@ class Bill extends React.Component {
 
     splitBillEqually = (people) => {
 
-        console.log("we need the total to divide it equally", this.state.total)
-        let splittingTotal = this.state.total
-        console.log("splitBillEqually (PEOPLE): ", people);
-        let splitEqual = splittingTotal / people
-        console.log("blaaaaaaaaaaaaaaaaaaaaa", splitEqual)
+        let splittingTotal = this.state.total;
+        let splitEqual = splittingTotal / people;
+
+        console.log("this.state.total: ", splittingTotal);
+        console.log("people: ", people);
+        console.log("splitEqual: ", splitEqual);
 
         this.setState({ 
             people: people,
             splitAmount: splitEqual
-        })    
+        });
+
         this.props.setPeople(people)
     }
 
     claimItem = (price, quantity, id) => {
 
-        console.log("waaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaah", this.state.people)
-        let party = this.state.people
-        console.log("for splitting each individual item", price)
-        console.log("is this the qty for each item for splitting", quantity)
-        let subTotal = price * quantity
-        let subTotalTwo = subTotal / party
-        console.log("we have to multiple the qty by the price", subTotal)
-        console.log("is this the split amnt for the individual person", subTotalTwo)
-
+        let party = this.state.people;
+        let subTotal = price * quantity;
+        let subTotalTwo = subTotal / party;
 
         let foods = this.state.food.filter(item => item.id !== id);
+
+        console.log("this.state.people: ", party);
+
+
 
         this.setState({
             subTotal: this.state.subTotal += subTotalTwo,
@@ -99,6 +107,10 @@ class Bill extends React.Component {
             food: foods
         })
 
+    };
+
+    handleHowMany = (item) => {
+        console.log("CURRENT ITEMS: ", item);
     }
 
     peopleInParty = (people) => {
@@ -110,7 +122,7 @@ class Bill extends React.Component {
                    <Link to="/payment" className="btn btn-outline-primary btn-sm"  onClick={(e) => this.peopleInParty(this.state.peopleInParty)}>
                         Person {i + 1}: ${this.state.subTotal}
                     </Link>
-                </div>);       
+                </div>);
         }
 
         return peopleInParty;
@@ -130,7 +142,8 @@ class Bill extends React.Component {
 
         let foods = this.state.food.filter(item => item.id !== id);
 
-        // console.log("this is fooooooooooooooooooooods ", foods);
+        console.log("this.state.food: ", this.state.food);
+        console.log("this is fooooooooooooooooooooods ", foods);
 
         this.setState({
             subTotal: this.state.subTotal += subTotalTwo,
@@ -145,70 +158,73 @@ class Bill extends React.Component {
         // console.log("is this the amount of people we need for the splitting of the bill", this.state.people)
         return (
             <div>
-            <div className="container">
-            <div className="form-group">
-                <label htmlFor="sel1">Select amount of people on the bill:</label>
-                <select className="form-control" id="people" onChange={this.handleInputChange}>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            {/* <div>
-                <TextField id="select-party" select label="Select" value={this.state.party} onChange={this.handleChange('party')} helperText="Please select your party size" margin="normal" >
-                    {Party.map(option => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.name}
-                        </MenuItem>
-                    ))}
-                </TextField>
-            </div> */}
-                </div> < div className="card">
-                <div className="card-header text-center">*Restaurant Name Placeholder* Bill
-            </div>
-            {
-            this.state.food.map((item) => {
-                                return (
-                        // <div className= "wrapper" style={{ display: this.state.clicked === true ? "none" : "inline-block"  }}>
-                        <div key={item.id}>
-
-                            <div className="card-body">
-                                <p>
-                                    <span>Qty: {item.qty} </span>
-                                    Item: {item.items} 
-                                    <span>
-                                        Price: ${item.price} </span>
-                                </p>
-
-                                <button className="btn btn-outline-primary btn-sm" onClick={() => this.splitEachItem(item.price, item.qty, item.id)}>
-                                    Split Equally
-                                </button>
-                                <button className="btn btn-outline-primary btn-sm" onClick={() => this.claimItem(item.price, item.qty, item.id)}>
-                                    Claim Item
-                                </button>
-                            </div>
-                                        </div>
-                                        // </div>
-                    );
-                })
-        } 
-        
-                        <form className="split">
-                            <div className="text-center">Total Price : {this.state.total}
-                                <Link to="/payment" className="btn btn-outline-primary btn-sm" onClick={(e) => this.splitBillEqually(this.state.splitAmount)}>Split Equally</Link> 
-                            </div> 
-                        </form> 
+                <div className="container">
+                    <div className="form-group">
+                        <label htmlFor="sel1">Select amount of people on the bill:</label>
+                        <select className="form-control" id="people" onChange={this.handleInputChange}>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
                     </div>
+                    <div className="card">
+                    <div className="card-header text-center">*Restaurant Name Placeholder* Bill
                 </div>
+                {
+                    this.state.food.filter(item => {
+                        <Modal show={this.state.show} handleClose={this.hideModal}>
+                            <h1>How many would you like to claim?</h1>
+                            <select onChange={this.handleInputChange}>
+                                {this.handleHowMany(item)}
+                            </select>
+                            <button onClick={() => this.claimItem}>OK</button>
+                        </Modal>
+                    })
+                }
 
-                <br />
+                {
+                    this.state.food.map(item => {
+                        return (
+                            <div>
+                                <div key={item.id}>
+                                    <div className="card-body">
+                                        <p>
+                                            <span>Qty: {item.qty} </span>
+                                            Item: {item.items}
+                                            <span>
+                                                Price: ${item.price} </span>
+                                        </p>
+                                        <button className="btn btn-outline-primary btn-sm" onClick={() => this.splitEachItem(item.price, item.qty,item.id)}>
+                                            Split Equally
+                                            </button>
+                                        <button className="btn btn-outline-primary btn-sm" onClick={this.showModal}>
+                                            {/*() => this.claimItem(item.price, item.qty, item.id)}*/}
+                                            Claim Item
+                                            </button>
+                                    </div>
+                                </div>
+                            </div>
+                        );            
+                    })
+                }
+        
+                    <form className="split">
+                        <div className="text-center">Total Price : {this.state.total}
+                            <Link to="/payment" className="btn btn-outline-primary btn-sm" onClick={(e) => this.splitBillEquall(this.state.splitAmount)}>Split Equally</Link> 
+                        </div> 
+                    </form> 
+                </div>
+            </div>
+
+            <br />
 
                 {
                     this.peopleInParty(this.state.people)
                 }
 
-                <br />
+            <br />
 
             </div>
         )

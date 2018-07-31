@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.use(session({
-  secret: "ihatesessions",
+  secret: "sessionsesh",
   resave: false,
   saveUninitialized: true,
   cookie: { secure: "auto", maxAge: null }
@@ -29,7 +29,7 @@ app.get("*", (req, res) => {
 });
 
 
-db.sequelize.sync({ force: true }).then(function () {
+db.sequelize.sync({ force: false }).then(function () {
     app.listen(PORT, function () {
         console.log("App listening on PORT " + PORT);
     });
