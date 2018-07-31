@@ -275,6 +275,7 @@ router.get("/logout", function(req, res) {
         });
     };
 });
+
 router.get("/api/bills/:id", function (req, res) {
     db.Qrcode.findAll({
             where: {
@@ -287,8 +288,19 @@ router.get("/api/bills/:id", function (req, res) {
         });
 });
 
+router.get("/api/payment/:claimed", function (req, res) {
 
+    console.log("is this what we need on the back end?! ",req.params)
 
+    db.Bill.findAll({
+            where: {
+                claimed: req.params.claimed
+            }
+        })
+        .then(function (dbBills) {
+            res.json(dbBills);
+        });
+});
 
 
 
