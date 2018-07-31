@@ -33,7 +33,7 @@ class Login extends React.Component {
                 window.location.href='/login'
             } else {
                 alert("You have been logged in!");
-                window.location.href='/';
+                window.location.href='/qr';
             }
         });
     }

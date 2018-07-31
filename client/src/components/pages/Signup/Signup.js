@@ -113,7 +113,7 @@ class Signup extends React.Component {
             if (response.data.code === 304) {
                 window.location.href = '/signup';
             } else {
-                window.location.href = '/';
+                window.location.href = '/qr';
             }
         }).catch(error => {
             throw error;

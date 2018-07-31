@@ -11,6 +11,8 @@ import Settings from '@material-ui/icons/BrightnessLow';
 import Contact from '@material-ui/icons/AccountCircle';
 import Help from '@material-ui/icons/HelpOutline';
 import Logout from '@material-ui/icons/ExitToApp';
+import axios from 'axios';
+
 
 export const TopItems = (
   <div>
@@ -51,7 +53,31 @@ export const TopItems = (
   </div>
 );
 
-export const BottomItems = (
+export class BottomItems extends React.component {
+  constructor(props) {
+    super(props);
+    
+    this.handleLogOut = this.handleLogOut.bind(this)
+  }
+  
+  handleLogOut = () => {
+    axios.get('/logout').then(response => {
+      console.log(response);
+      if (response.data.code === 707) {
+        alert("You are logged in.");
+        window.location.href = '/';
+      } else if (response.data === "") {
+        alert("You are not logged in!");
+        window.location.href = '/login';
+      } else {
+        alert("You have been logged out.");
+        window.location.href = '/login';
+      };
+    });
+  };
+
+  render () {
+  return (
   <div>
     <ListItem button component="a" href="./contact">
       <ListItemIcon>
@@ -69,9 +95,11 @@ export const BottomItems = (
 
     <ListItem button component="a" href="./logout">
       <ListItemIcon>
-        <Logout />
+        <Logout onClick={this.handleLogOut}/>
       </ListItemIcon>
       <ListItemText primary="Logout" />
     </ListItem>
   </div>
 );
+  }
+}
