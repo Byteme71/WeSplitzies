@@ -10,6 +10,9 @@ module.exports = function (sequelize, DataTypes) {
         },
         qty: {
             type: DataTypes.INTEGER
+        },
+        claimed: {
+            type: DataTypes.INTEGER
         }
 
     },{

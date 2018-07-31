@@ -1,16 +1,70 @@
 import React from 'react';
-// import axios from "axios";
+import axios from "axios";
 // import Bill from './Bill';
 
 class Payment extends React.Component {
 
+    state = {
+        food: [],
+        total: 0
+    }
+
+
+    componentDidMount() { 
+     
+        axios.get(`/api/payment/1`).then(response => {
+            console.log("aree these the resposnes form the payment page?! ",response.data)
+            
+                this.setState({
+                    food: response.data
+                }, () => {
+                    console.log("we need just the claimed items to appear on the payment page!", this.state.food)
+                    })
+            
+             this.getTotalPersonOne();
+        })
+       
+    }
+
+
+    getTotalPersonOne = () => {
+        this.state.food.map(item => {
+            let qty = item.qty;
+            let price = item.price;
+            let totalPrice = qty * price
+
+            console.log(totalPrice)
+
+
+            this.setState({
+                total: this.state.total += totalPrice
+            }, () => {
+                console.log("is this the total for the person 1 on the payment page?!?!?!!?", this.state.total)
+            })
+
+        })
+    }
+
+
     render() {
         console.log("this is on the payment page ", this.props)
-
+        console.log("is this the updated foooooooooooooooooood",this.state.food)
         return (
             <div className="container">
                 <h1>Your total to pay is: ${this.props.people}</h1>
-                                
+                <h2>Items Claimed by Person 1:</h2>
+                {this.state.food.map(item => {
+                    return (
+                    <div className="text-center" key={item.id}>
+                        <ul>
+                            <li>{item.items}</li>
+                        </ul>
+                    </div>
+                    )
+                })}
+                
+               <h2> Total for person 1 = {this.state.total} </h2>
+                
                 <div className="creditCardForm">
                     <div className="heading">
                         <h4>Enter Card Info</h4>
