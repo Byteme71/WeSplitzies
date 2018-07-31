@@ -53,31 +53,7 @@ export const TopItems = (
   </div>
 );
 
-export class BottomItems extends React.component {
-  constructor(props) {
-    super(props);
-    
-    this.handleLogOut = this.handleLogOut.bind(this)
-  }
-  
-  handleLogOut = () => {
-    axios.get('/logout').then(response => {
-      console.log(response);
-      if (response.data.code === 707) {
-        alert("You are logged in.");
-        window.location.href = '/';
-      } else if (response.data === "") {
-        alert("You are not logged in!");
-        window.location.href = '/login';
-      } else {
-        alert("You have been logged out.");
-        window.location.href = '/login';
-      };
-    });
-  };
-
-  render () {
-  return (
+export const BottomItems = (
   <div>
     <ListItem button component="a" href="./contact">
       <ListItemIcon>
@@ -95,11 +71,9 @@ export class BottomItems extends React.component {
 
     <ListItem button component="a" href="./logout">
       <ListItemIcon>
-        <Logout onClick={this.handleLogOut}/>
+        <Logout />
       </ListItemIcon>
       <ListItemText primary="Logout" />
     </ListItem>
   </div>
 );
-  }
-}
