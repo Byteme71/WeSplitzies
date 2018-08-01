@@ -63,16 +63,13 @@ export class BottomItems extends React.Component {
   }
 
   handleLogOut = () => {
-    axios.get('/logout').then(response => {
+    axios.get('/api/logout').then(response => {
       console.log(response);
       if (response.data.code === 707) {
-        alert("You are logged in.");
         window.location = '/';
       } else if (response.data === "") {
-        alert("You are not logged in!");
         window.location = '/login';
       } else {
-        alert("You have been logged out.");
         window.location = '/login';
       };
     });

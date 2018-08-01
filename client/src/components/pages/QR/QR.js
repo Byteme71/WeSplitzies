@@ -2,10 +2,18 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import "./QR.css";
+import axios from 'axios';
 
 class QR extends React.Component {
+
+    componentDidMount = () => {
+        axios.get('/api/qr').then(response => {
+            console.log(response);
+        });
+    }
+
     toBillPage = () => {
-        window.location.href = "/bill";
+        window.location = "/bill";
     }
     
     render() {

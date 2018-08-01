@@ -5,35 +5,44 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import './History.css';
+import axios from 'axios';
+class History extends React.Component {
 
-const History = () => {
-  return (
-    <div>
-      <ExpansionPanel className="main-box">
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>Expansion Panel 1</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+  componentDidMount = () => {
+    axios.get('/api/history').then(response => {
+      console.log(response);
+    });
+  }
 
-      <ExpansionPanel className="main-box">
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>Expansion Panel 2</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    </div>
-  );
+  render() {
+    return (
+      <div>
+        <ExpansionPanel className="main-box">
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography>Expansion Panel 1</Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Typography>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+              sit amet blandit leo lobortis eget.
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+
+        <ExpansionPanel className="main-box">
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography>Expansion Panel 2</Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Typography>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+              sit amet blandit leo lobortis eget.
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+      </div>
+    );
+  }
 };
 
 export default History;

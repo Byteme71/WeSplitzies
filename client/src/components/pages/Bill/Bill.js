@@ -152,7 +152,7 @@ class Bill extends React.Component {
                     <option value="5">5</option>
                 </select>
                 </div> < div className="card">
-                <div className="card-header text-center">*Restaurant Name Placeholder* Bill
+                <div className="card-header text-center">Burgers Restaurant Bill
             </div>
             {
             this.state.food.map((item) => {
