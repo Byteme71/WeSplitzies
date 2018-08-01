@@ -111,9 +111,9 @@ class Signup extends React.Component {
 
         axios.post('/signup', newUser).then(response => {
             if (response.data.code === 304) {
-                window.location.href = '/signup';
+                window.location = '/signup';
             } else {
-                window.location.href = '/qr';
+                window.location = '/qr';
             }
         }).catch(error => {
             throw error;
