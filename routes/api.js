@@ -162,7 +162,7 @@ router.get('/history', function (req, res) {
     };
 });
 
-router.get('/home', function (req, res) {
+router.get('/api/home', function (req, res) {
     if (req.session.user) {
         res.redirect('/');
     } else if (req.cookie) {
@@ -179,7 +179,7 @@ router.get('/home', function (req, res) {
     };
 });
 
-router.get('/login', function (req, res) {
+router.get('/api/login', function (req, res) {
     if (req.session.user) {
         res.redirect('/');
     } else if (req.cookie) {
@@ -196,7 +196,7 @@ router.get('/login', function (req, res) {
     };
 });
 
-router.get('/payment', function (req, res) {
+router.get('/api/payment', function (req, res) {
     if (req.session.user) {
         res.redirect('/');
     } else if (req.cookie) {
@@ -213,7 +213,7 @@ router.get('/payment', function (req, res) {
     };
 });
 
-router.get('/qr', function (req, res) {
+router.get('/api/qr', function (req, res) {
     if (req.session.user) {
         res.redirect('/');
     } else if (req.cookie) {
@@ -230,7 +230,7 @@ router.get('/qr', function (req, res) {
     };
 });
 
-router.get('/settings', function (req, res) {
+router.get('/api/settings', function (req, res) {
     if (req.session.user) {
         res.redirect('/');
     } else if (req.cookie) {
@@ -247,7 +247,7 @@ router.get('/settings', function (req, res) {
     };
 });
 
-router.get('/signup', function (req, res) {
+router.get('/api/signup', function (req, res) {
     if (req.session.user) {
         res.redirect('/');
     } else if (req.cookie) {
@@ -264,7 +264,7 @@ router.get('/signup', function (req, res) {
     };
 });
 
-router.get("/logout", function(req, res) {
+router.get("/api/logout", function(req, res) {
     if (req.body) {
         res.clearCookie("TOKEN");
         req.session.destroy();
