@@ -16,6 +16,8 @@ class Bill extends React.Component {
         clicked: false
     };
 
+    
+
     componentDidMount() {
 
         axios.get(`/api/bills/1`).then(response => {
