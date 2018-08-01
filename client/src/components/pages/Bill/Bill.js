@@ -195,7 +195,7 @@ class Bill extends React.Component {
 
                         <div key={item.id}>
 
-                            <div>
+                            <div className="tableWrapper">
                                     <Paper className="root">
                                         <Table className="table">
                                             <TableHead>
@@ -236,9 +236,11 @@ class Bill extends React.Component {
                                 <button className="btn btn-outline-primary btn-sm" onClick={() => this.splitEachItem(item.price, item.qty, item.id)}>
                                     Split Equally
                                 </button>
+
                                 <button className="btn btn-outline-primary btn-sm" onClick={() => this.claimItem(item.price, item.qty, item.id)}>
                                     Claim Item
                                 </button>
+                                
                             </div>
                                         </div>
                                         // </div>
