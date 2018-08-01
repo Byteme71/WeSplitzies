@@ -4,7 +4,7 @@ import axios from 'axios';
 class Logout extends React.Component {
 
     handleLogOut = () => {
-        axios.get('/logout').then(response => {
+        axios.get('/api/logout').then(response => {
             console.log(response);
             if (response.data.code === 707) {
                 alert("You are logged in.");

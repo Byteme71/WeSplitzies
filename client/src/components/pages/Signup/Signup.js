@@ -109,7 +109,7 @@ class Signup extends React.Component {
 
         console.log("NEW USER: ", newUser);
 
-        axios.post('/signup', newUser).then(response => {
+        axios.post('/api/signup', newUser).then(response => {
             if (response.data.code === 304) {
                 window.location = '/signup';
             } else {

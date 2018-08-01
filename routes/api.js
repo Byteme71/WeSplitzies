@@ -17,7 +17,7 @@ router.post("/api/bills", function (req, res) {
     });
 });
 
-router.post("/signup", function (req, res) {
+router.post("/api/signup", function (req, res) {
     db.User.findOne({
         where: {
             email: req.body.email
@@ -54,7 +54,7 @@ router.post("/signup", function (req, res) {
     });
 });
 
-router.post("/login", function (req, res) {
+router.post("/api/login", function (req, res) {
     db.User.findOne({
         where: {
             email: req.body.email
@@ -94,7 +94,7 @@ router.post("/login", function (req, res) {
     });
 });
 
-router.get('/contact', function (req, res) {
+router.get('/api/contact', function (req, res) {
     if (req.session.user) {
         res.redirect('/');
     } else if (req.cookie) {
@@ -111,7 +111,7 @@ router.get('/contact', function (req, res) {
     };
 });
 
-router.get('/current', function (req, res) {
+router.get('/api/current', function (req, res) {
     if (req.session.user) {
         res.redirect('/');
     } else if (req.cookie) {
@@ -128,7 +128,7 @@ router.get('/current', function (req, res) {
     };
 });
 
-router.get('/help', function (req, res) {
+router.get('/api/help', function (req, res) {
     if (req.session.user) {
         res.redirect('/');
     } else if (req.cookie) {
@@ -145,7 +145,7 @@ router.get('/help', function (req, res) {
     };
 });
 
-router.get('/history', function (req, res) {
+router.get('/api/history', function (req, res) {
     if (req.session.user) {
         res.redirect('/');
     } else if (req.cookie) {

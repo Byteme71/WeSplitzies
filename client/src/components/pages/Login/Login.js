@@ -27,7 +27,7 @@ class Login extends React.Component {
 
         console.log("CURRENT USER: ", existingUser);
 
-        axios.post('/login', existingUser).then(response => {
+        axios.post('/api/login', existingUser).then(response => {
             if (response.data.code === 504) {
                 window.location = '/login';
             } else {
