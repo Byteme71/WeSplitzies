@@ -16,35 +16,35 @@ import axios from 'axios';
 
 export const TopItems = (
   <div>
-    <ListItem button component="a" href="./bill">
+    <ListItem button component="a" href="/bill">
       <ListItemIcon>
         <Receipt />
       </ListItemIcon>
       <ListItemText primary="Bill" />
     </ListItem>
 
-    <ListItem button component="a" href="./qr">
+    <ListItem button component="a" href="/qr">
       <ListItemIcon>
         <QR />
       </ListItemIcon>
       <ListItemText primary="QR Scan" />
     </ListItem>
 
-    <ListItem button component="a" href="./history">
+    <ListItem button component="a" href="/history">
       <ListItemIcon>
         <History />
       </ListItemIcon>
       <ListItemText primary="History" />
     </ListItem>
 
-    <ListItem button component="a" href="./payment">
+    <ListItem button component="a" href="/payment">
       <ListItemIcon>
         <Payment />
       </ListItemIcon>
       <ListItemText primary="Payment" />
     </ListItem>
 
-    <ListItem button component="a" href="./settings">
+    <ListItem button component="a" href="/settings">
       <ListItemIcon>
         <Settings />
       </ListItemIcon>
