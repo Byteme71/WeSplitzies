@@ -5,6 +5,10 @@ import axios from "axios";
 // import TextField from '@material-ui/core/TextField';
 // import { Party } from './Party.js';
 
+let setTax = .0725
+// let taxSub = (setTax * this.state.total).toFixed(2);
+// let grandTotal = taxSub + this.state.total;
+
 class Bill extends React.Component {
     state = {
         food: [],
@@ -15,8 +19,6 @@ class Bill extends React.Component {
         subTotal: 0,
         clicked: false
     };
-
-    
 
     componentDidMount() {
 
@@ -61,6 +63,7 @@ class Bill extends React.Component {
     }
 
     splitBillEqually = (people) => {
+        
 
         console.log("we need the total to divide it equally", this.state.total)
         let splittingTotal = this.state.total
@@ -96,6 +99,18 @@ class Bill extends React.Component {
         })
 
     }
+
+
+    // taxStuff = () => {
+    //     let setTax = .0725
+    //     let taxSub = (setTax * this.state.total).toFixed(2);
+    //     let grandTotal = taxSub + this.state.total;
+
+    //     console.log("subsandwich total: ", taxSub);
+    //     console.log("life is grand total: ", grandTotal);
+
+    // }
+
 
     peopleInParty = (people) => {
         var peopleInParty = [];
@@ -136,7 +151,19 @@ class Bill extends React.Component {
     }
 
     render() {
+
         console.log("this is coming from the bill page", this.state)
+
+        let taxSub = Math.round((setTax * this.state.total) * 100) / 100;
+
+        console.log("grrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", taxSub)
+
+        let grandTotal = (taxSub + this.state.total).toFixed(2);
+
+        console.log("moooooooooooooooooooooooooooo", grandTotal)
+
+        
+
         // console.log("fbDBDFBAEBer", this.state.total)
         // console.log("is this the amount of people we need for the splitting of the bill", this.state.people)
         return (
@@ -152,7 +179,7 @@ class Bill extends React.Component {
                     <option value="5">5</option>
                 </select>
                 </div> < div className="card">
-                <div className="card-header text-center">Burgers Restaurant Bill
+                <div className="card-header text-center"> <h2>Burger Joint Bill</h2>
             </div>
             {
             this.state.food.map((item) => {
@@ -182,7 +209,10 @@ class Bill extends React.Component {
         } 
         
                         <form className="split">
-                            <div className="text-center">Total Price : {this.state.total}
+                            <div className="text-center">
+                                <h4>Sub-Total: ${this.state.total}</h4>
+                                <h4>Tax Amount: ${taxSub}</h4>
+                                <h4>Grand total: ${grandTotal}</h4>
                                 <Link to="/payment" className="btn btn-outline-primary btn-sm" onClick={(e) => this.splitBillEqually(this.state.splitAmount)}>Split Equally</Link> 
                             </div> 
                         </form> 
