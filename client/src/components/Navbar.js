@@ -112,7 +112,8 @@ class Navbar extends React.Component {
         </AppBar>
 
         <Drawer variant="permanent" classes={{paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),}} open={this.state.open} >
-            <div className={classes.toolbar}>
+          <div className={classes.toolbar}>
+                        <img src={require("../images/Logo.png")} width={140} height={35} />
               <IconButton onClick={this.handleDrawerClose}>
                 {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
               </IconButton>

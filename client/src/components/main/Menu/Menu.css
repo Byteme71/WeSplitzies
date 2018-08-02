@@ -1,0 +1,15 @@
+#btn-card {
+    max-width: 600px;
+    margin: 0 auto 0 auto;
+    text-align: center;
+}
+
+#login-btn {
+    min-width: 110px;
+    margin: 10px 10px 20px 10px;
+}
+
+#signup-btn {
+    min-width: 110px;
+    margin: 10px 10px 20px 10px;
+}
