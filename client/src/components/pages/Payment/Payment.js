@@ -63,7 +63,7 @@ class Payment extends React.Component {
                     )
                 })}
                 
-               <h2> Total for person 1 = {this.state.total} </h2>
+               <h2> Total for person 1 = ${this.state.total} </h2>
                 
                 <div className="creditCardForm">
                     <div className="heading">
